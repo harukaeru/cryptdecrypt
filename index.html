@@ -48,7 +48,7 @@ const ccsv=`あ 3
 り |
 る .
 れ ;
-ろ \
+ろ \\
 わ 0
 を 6
 ん ~
@@ -106,7 +106,7 @@ function crypt(sentence) {
     for(let s of sentence) {
         let pa = PA[s] || s;
         for(let p of pa) {
-            let a = A[p] || p;
+            let a = A[p] === undefined ? p : A[p];
             if(a === 'Cap') {
                 crypted = crypted.slice(0, -1) + crypted.slice(-1).toUpperCase();
             } else {
