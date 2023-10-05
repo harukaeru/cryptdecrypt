@@ -1,0 +1,157 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+<script>
+const ccsv=`あ 3
+い e
+う 4
+え 5
+お 6
+か t
+き g
+く h
+け :
+こ b
+さ x
+し d
+す r
+せ p
+そ c
+た q
+ち a
+っ z
+つ z
+て w
+と s
+な u
+に i
+ぬ 1
+ね ,
+の k
+は f
+ひ v
+ふ 2
+へ ^
+ほ -
+ま j
+み n
+む ]
+め /
+も m
+ゃ 7
+ゅ 8
+ょ 9
+や 7
+ゆ 8
+よ 9
+ら o
+り |
+る .
+れ ;
+ろ \
+わ 0
+を 6
+ん ~
+゛ Cap
+゜ Cap`
+
+const dcsv=`が,か
+ぎ,き
+ぐ,く
+げ,け
+ご,こ
+ざ,さ
+じ,し
+ず,す
+ぜ,せ
+ぞ,そ
+だ,た
+ぢ,ち
+づ,つ
+で,て
+ど,と
+ば,は
+び,ひ
+ぶ,ふ
+べ,へ
+ぼ,ほ
+ぱ,は
+ぴ,ひ
+ぷ,ふ
+ぺ,へ
+ぽ,ほ`
+
+let A = {};
+let B = {};
+
+lines = ccsv.split('\n')
+for(let line of lines) {
+    let [plain, crypted] = line.split(' ');
+    A[plain] = crypted;
+    B[crypted] = plain;
+}
+
+let PA = {};
+let PB = {};
+
+lines = dcsv.split('\n')
+for(let line of lines) {
+    let [plain, mid] = line.split(',');
+    PA[plain] = mid + "゛";
+    PB[mid] = plain;
+}
+
+function crypt(sentence) {
+    let crypted = "";
+    for(let s of sentence) {
+        let pa = PA[s] || s;
+        for(let p of pa) {
+            let a = A[p] || p;
+            if(a === 'Cap') {
+                crypted = crypted.slice(0, -1) + crypted.slice(-1).toUpperCase();
+            } else {
+                crypted += a;
+            }
+        }
+    }
+    return crypted;
+}
+
+function decrypt(crypted) {
+    let sentence = "";
+    for(let c of crypted) {
+        let b = B[c.toLowerCase()] || c;
+        if(c.toUpperCase() === c && !'ふへほ'.includes(b)) {
+            sentence += PB[b] || b;
+        } else {
+            sentence += b;
+        }
+    }
+    return sentence;
+}
+</script>
+<style>
+textarea {
+  width: 50%;
+}
+</style>
+</head>
+<body>
+  <label>平文</label>
+  <textarea rows=5 id="plaintext"></textarea>
+  <br />
+  <label>暗号</label>
+  <textarea rows=5 id="crypted"></textarea>
+</body>
+<script>
+  plaintext.addEventListener('input', (e) => {
+    crypted.value = crypt(e.target.value)
+  })
+  crypted.addEventListener('input', (e) => {
+    plaintext.value = decrypt(e.target.value)
+  })
+  const init = "こんにちは! このさいとにきてくれてありがとう! あんごうをたのしんでいってくださいね!\nすきです"
+  plaintext.value = init
+  crypted.value = crypt(init)
+</script>
+</html>
