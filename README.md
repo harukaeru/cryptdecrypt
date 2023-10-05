@@ -14,7 +14,7 @@ bbtozt4bsTWgjr。
 vo2~se4kf、msk6|Du.k2~Wr。
 i84|9hr.sDS4wgi^~t~x;jr。
 ```
-https://rawcdn.githack.com/harukaeru/cryptdecrypt/af45fa51c3e9384b36eae22cc54d4b4684a77fda/index.html
+https://rawcdn.githack.com/harukaeru/cryptdecrypt/1d7089df7688f5b85dbc9bc2459ef73cad79e111/index.html
 
 ### |23;~r
 ```
